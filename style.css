@@ -379,16 +379,21 @@ a{
     left: 65%;
 }
 
-.car-wrapper{
-    position: relative;
-    height: 40px;
-}
-.car{
-    position: absolute;
-    width: 45vw;
-    left: 5%;
+.car-wrapper {
+  position: relative;
+  height: 120px; /* increase visibility */
+  margin-top: 40px;
 }
 
+.car {
+  position: absolute;
+  width: 45vw;
+  left: 0;
+  top: 10px;
+  transform: translateX(0);
+  transition: transform 0.1s linear;
+  z-index: 2;
+}
 
 .ornament-wrap::before,
 .ornament-wrap::after {

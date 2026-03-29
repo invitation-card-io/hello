@@ -360,7 +360,7 @@ text-align: center;
     border-radius: 50%;
     border: 1px solid #d8ba8a;
     box-shadow: 0 15px 45px rgba(175,140,92,0.18);
-    animation: floatSoft 5s ease-in-out infinite;
+    animation: floatSoft 2s ease-in-out infinite;
 
 }
 
@@ -379,20 +379,21 @@ a{
     left: 65%;
 }
 
+
 .car-wrapper {
   position: relative;
-  height: 120px; /* increase visibility */
+  height: 120px;
   margin-top: 40px;
+  width: 100%;
 }
 
 .car {
   position: absolute;
   width: 45vw;
-  left: 0;
+  left: -100vw; /* start OFF SCREEN */
   top: 10px;
   transform: translateX(0);
-  transition: transform 0.1s linear;
-  z-index: 2;
+  will-change: transform;
 }
 
 .ornament-wrap::before,
@@ -419,7 +420,7 @@ a{
 
   @keyframes floatSoft {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
+      50% { transform: translateY(-15px); }
     }
 
     @keyframes shine {

@@ -12,22 +12,29 @@ reveals.forEach(el => observer.observe(el));
 
 
 const car = document.querySelector(".car");
-const carSection = document.querySelector(".car-wrapper");
 
+function moveCar() {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+  if (docHeight <= 0) return; // prevent divide issues
+
+  let scrollPercent = scrollTop / docHeight;
+
+  // clamp between 0 and 1
+  scrollPercent = Math.max(0, Math.min(1, scrollPercent));
+
+  const maxMove = window.innerWidth * 1.6; // allow full travel
+
+  const moveX = scrollPercent * maxMove;
+
+  car.style.transform = `translateX(${moveX}px)`;
+}
+
+// smoother than scroll event
 window.addEventListener("scroll", () => {
-  const rect = carSection.getBoundingClientRect();
-
-  const screenHeight = window.innerHeight;
-
-  // Only animate when section is visible
-  if (rect.top < screenHeight && rect.bottom > 0) {
-
-    const progress = 1 - rect.top / screenHeight;
-
-    const maxMove = window.innerWidth * 0.6;
-
-    const moveX = Math.max(0, Math.min(progress * maxMove, maxMove));
-
-    car.style.transform = `translateX(${moveX}px)`;
-  }
+  requestAnimationFrame(moveCar);
 });
+
+// run once on load
+moveCar();
